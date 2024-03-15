@@ -1,0 +1,35 @@
+﻿{
+    "spectralClassConfiguration": {
+        "classO": {
+            "percent": 2,
+            "defaultPlanetProbability": 10
+        },
+        "classB": {
+            "percent": 5,
+            "defaultPlanetProbability": 20
+        },
+        "classA": {
+            "percent": 5,
+            "defaultPlanetProbability": 30
+        },
+        "classF": {
+            "percent": 7,
+            "defaultPlanetProbability": 40
+        },
+        "classG": {
+            "percent": 10,
+            "defaultPlanetProbability": 50
+        },
+        "classK": {
+            "percent": 15,
+            "defaultPlanetProbability": 60
+        },
+        "classM": {
+            "percent": 56,
+            "defaultPlanetProbability": 80
+        }
+    },
+    "luminosityClass": {
+        
+    }
+}

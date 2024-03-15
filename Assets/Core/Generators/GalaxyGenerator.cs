@@ -20,7 +20,7 @@ namespace Core.Generators
 
     public class GalaxyGenerator
     {
-        private GenerationConfigurator _configurator;
+        private readonly GenerationConfigurator _configurator;
         private Weak<IGalaxyGeneratorDelegate> _delegate;
         private StarSystemGenerator _starSystemGenerator;
 
