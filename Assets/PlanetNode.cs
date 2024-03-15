@@ -1,5 +1,6 @@
 using System;
 using Core.Entity;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,7 +10,13 @@ public class PlanetNode : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Planet Planet;
     public int index;
-    
+
+    private void Awake()
+    {
+        var collider = gameObject.AddComponent<BoxCollider2D>();
+        collider.size = Vector2.one;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,11 +32,17 @@ public class PlanetNode : MonoBehaviour
             new Vector2(0.5f, 0.5f),
             256
         );
+        
         sprite.name = "Planet " + index.ToString();
         spriteRenderer.sprite = sprite;
-
+        
         var position = Random.Range(0, 2) == 0 ? 1 : -1;
         gameObject.transform.position = new Vector3((index + 1) * 10 * position, 0);
+    }
+
+    void OnMouseDown()
+    {
+        Debug.Log("Mouse down");
     }
 
     // Update is called once per frame
