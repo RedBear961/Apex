@@ -1,4 +1,5 @@
 ﻿using System;
+using Core.Common;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -16,7 +17,7 @@ namespace Core.Entity
 
     public interface ICelestialBody : INode
     {
-        [CanBeNull] public WeakReference<ICelestialBody> Barycenter { get; }
+        [CanBeNull] public Weak<ICelestialBody> Barycenter { get; }
 
         [CanBeNull] public ICelestialBody[] Sattelites { get; }
     }

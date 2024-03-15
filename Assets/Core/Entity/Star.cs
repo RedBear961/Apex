@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Core.Common;
 
 namespace Core.Entity
 {
@@ -7,7 +8,7 @@ namespace Core.Entity
     {
         // MARK: - ICelestialBody
     
-        public WeakReference<ICelestialBody> Barycenter { get; internal set; }
+        public Weak<ICelestialBody> Barycenter { get; internal set; }
     
         public ICelestialBody[] Sattelites { get; internal set; }
         
@@ -16,7 +17,7 @@ namespace Core.Entity
         public void ApplyBehavior(GameObject gameObject)
         {
             var node = gameObject.AddComponent<StarNode>();
-            node.data = this;
+            node.Data = this;
         }
     
         // MARK: - Public

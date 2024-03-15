@@ -1,19 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Core.Entity;
 using Unity.VisualScripting;
 using UnityEngine;
+using Matrix4x4 = UnityEngine.Matrix4x4;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class StarNode : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
-    public Star data;
+    public LineRenderer[] orbits;
+    public Star Data;
     
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Some log");
+        Debug.Log("[StarNode] Begin system drawing");
         this.spriteRenderer = this.GetComponent<SpriteRenderer>();
         spriteRenderer.color = Color.yellow;
 
@@ -24,13 +29,64 @@ public class StarNode : MonoBehaviour
             new Vector2(0.5f, 0.5f),
             256
             );
-        sprite.name = "Circle";
+        sprite.name = "Star";
         spriteRenderer.sprite = sprite;
+
+        gameObject.transform.localScale = new Vector3(2, 2);
+        
+        if (Data.Sattelites != null)
+        {
+            orbits = new LineRenderer[Data.Sattelites.Length];
+            AppendSattelites();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    
+    private void AppendSattelites()
+    {
+        var sattelites = Data.Sattelites;
+        if (sattelites == null)
+        {
+            return;
+        }
+
+        int index = 0;
+        foreach (var sattelite in sattelites)
+        {
+            switch (sattelite)
+            {
+                case Planet planet:
+                    AppendPlanet(planet, index);
+                    break;
+                default:
+                    break;
+            }
+
+            index += 1;
+        }
+    }
+
+    private void AppendPlanet(Planet planet, int index)
+    {
+        var newPlanet = new GameObject
+        {
+            name = "Planet"
+        };
+        newPlanet.transform.SetParent(gameObject.transform);
+                    
+        var planetNode = newPlanet.AddComponent<PlanetNode>();
+        planetNode.Planet = planet;
+        planetNode.index = index;
+        
+        var orbit = new GameObject();
+        orbit.transform.SetParent(gameObject.transform);
+        orbit.name = "Orbit " + index.ToString();
+        var orbitNode = orbit.AddComponent<OrbitNode>();
+        orbitNode.radius = (index + 1) * 10f;
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using Core.Entity;
 using Core.Generators;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,8 +25,11 @@ public class ScenePreparer : MonoBehaviour
     private void Start()
     {
         var starSystem = _generator.GetStarSystem();
-        
+        var starData = starSystem.Center as Star;
+
         var star = new GameObject();
-        star.AddComponent<StarNode>();
+        star.name = "Star";
+        var starNode = star.AddComponent<StarNode>();
+        starNode.Data = starData;
     }
 }

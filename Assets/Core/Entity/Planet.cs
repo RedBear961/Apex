@@ -1,12 +1,13 @@
 ﻿using System;
 using JetBrains.Annotations;
 using UnityEngine;
+using Core.Common;
 
 namespace Core.Entity
 {
     public class Planet : ICelestialBody
     {
-        [NotNull] public WeakReference<ICelestialBody> Barycenter { get; set; }
+        [NotNull] public Weak<ICelestialBody> Barycenter { get; set; }
     
         public ICelestialBody[] Sattelites { get; }
         
